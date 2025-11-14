@@ -50,6 +50,25 @@ ci_coverage = 100 - (ci_misses / iterations * 100)
 print(f"False positive rate over {iterations} A/A tests: {fp_rate:.1f}% (expected ~5%)")
 print(f"95% CI coverage over {iterations} A/A tests: {ci_coverage:.1f}% (expected ~95%)")
 
+
+# 2b. Simple A/B (non-null) demo
+np.random.seed(3)
+n = 200
+true_effect = 0.20  # treatment mean lift
+control = np.random.normal(0, 1, n)
+treatment = np.random.normal(true_effect, 1, n)
+stat, p = t_test(control, treatment)
+
+# Welch 95% CI for the mean difference
+s0 = np.var(control, ddof=1); s1 = np.var(treatment, ddof=1)
+se = np.sqrt(s0/n + s1/n)
+df = (s0/n + s1/n)**2 / ((s0**2)/((n**2)*(n-1)) + (s1**2)/((n**2)*(n-1)))
+from scipy.stats import t
+tcrit = t.ppf(0.975, df)
+diff = treatment.mean() - control.mean()
+print(f"A/B effect ≈ {diff:.3f} (95% CI [{diff - tcrit*se:.3f}, {diff + tcrit*se:.3f}]), p={p:.3g}")
+
+
 # 3. CUPED variance reduction demonstration
 np.random.seed(1)
 N = 1000  # samples per group for demonstration
@@ -87,3 +106,4 @@ post_treatment = unit_effect_treat + time_effect + treatment_effect + np.random.
 diff_est, t_stat, p_val = diff_in_diff(pre_control, post_control, pre_treatment, post_treatment)
 print(f"Diff-in-diff estimate: {diff_est:.2f} (true effect was {treatment_effect})")
 print(f"T-statistic: {t_stat:.2f}, p-value: {p_val:.2e}")
+
