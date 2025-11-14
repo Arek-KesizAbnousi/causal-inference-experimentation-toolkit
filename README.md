@@ -52,10 +52,6 @@ pip install -r requirements.txt
 python example_usage.py
 ```
 
-**(Optional) Regenerate the DiD figure shown above:**
-```bash
-python scripts/make_did_plot.py
-```
 
 ## Results
 - **A/A validation (1,000 sims):** false positives ≈ **5%**; **95% CI** coverage ≈ **93–96%**.
