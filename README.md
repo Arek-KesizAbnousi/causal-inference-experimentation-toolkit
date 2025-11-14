@@ -13,7 +13,6 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [Results (What you should see)](#results-what-you-should-see)
-- [Acknowledgments](#acknowledgments)
 
 ## Description
 This toolkit demonstrates core experimentation and causal‑inference skills:
@@ -63,5 +62,3 @@ python scripts/make_did_plot.py
 - **CUPED:** with pre‑period metric corr ≈ 0.4 → variance reduction ≈ **16–20%** → roughly that many **fewer samples** for same power.
 - **DiD:** recovers the injected treatment effect on synthetic panel data (within simulation noise) with sensible confidence intervals.
 
-## Acknowledgments
-Inspired by common practices in online experimentation and causal analysis (CUPED, fixed‑effects DiD) used by data science teams at major tech companies.
