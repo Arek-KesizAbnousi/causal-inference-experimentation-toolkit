@@ -1,0 +1,6 @@
+# Core numerical + statistics
+numpy>=1.22
+scipy>=1.9
+
+# For regenerating the README figure (scripts/make_did_plot.py)
+matplotlib>=3.5
