@@ -38,6 +38,21 @@ causal-inference-experimentation-toolkit/
 ├── requirements.txt             # numpy, scipy
 └── README.md
 ```
+**What’s in the Python files**
+
+- `experiment_toolkit.py` (library)
+  - `required_sample_size`, `minimum_detectable_effect` — power/MDE for means.
+  - `t_test` — Welch two-sample t-test with p-value.
+  - `cuped_adjust` — CUPED (θ = Cov(Y, X) / Var(X), with centered X) returning adjusted outcomes + θ.
+  - `two_prop_z_test` — two-proportion z-test (if you analyze binary rates).
+  - `diff_in_diff` — Difference-in-Differences on change scores with Welch CI;
+    in a two-period setting this equals a two-way fixed effects estimator.
+
+- `example_usage.py` (demo)
+  - **Power/MDE**: prints required N and the MDE for a given N.
+  - **A/A validation (1000 sims)**: prints false-positive rate and 95% CI coverage.
+  - **CUPED**: simulates correlated pre-period metric, prints θ and % variance reduction (~15–20%).
+  - **DiD**: simulates panel data with unit & time effects, prints effect + 95% CI + p-value.
 
 ## Installation
 ```bash
