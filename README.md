@@ -1,13 +1,23 @@
+
 # Causal Inference & Experimentation Toolkit
 
-**At a glance:** A compact Python toolkit for **A/B testing** (power/MDE, hypothesis tests), **variance reduction** with **CUPED**, and **Difference‑in‑Differences (DiD, two‑way fixed effects)** on synthetic panel data. Includes an **A/A validation** (1,000 sims) to show type I error ≈ 5% and CI coverage ~93–96%.
+## Description
+A compact Python toolkit for **A/B testing** (power/MDE, hypothesis tests), **variance reduction** with **CUPED**, and **Difference‑in‑Differences (DiD, two‑way fixed effects)** on synthetic panel data. Includes a **1,000‑run A/A validation** to verify calibration (type I ≈ 5%, 95% CI coverage ~93–96%).
+
+- **A/B testing utilities:** power & **minimum detectable effect (MDE)**; **Welch t‑tests** (means) and **two‑proportion z‑tests** (rates) with confidence intervals.
+- **CUPED:** covariate adjustment using pre‑experiment data → ~**15–20%** fewer samples on synthetic data.
+- **Difference‑in‑Differences:** estimate treatment effects with **two‑way fixed effects** logic on simulated panel data.
+- **Validation:** **1,000× A/A simulations** confirm calibration (type I ≈ **0.05**; 95% CI coverage ≈ **0.95**).
+
+**Feature tags:** A/B testing (split‑testing) • Power & MDE • Welch t‑test • Two‑proportion z‑test • CUPED • DiD (two‑way fixed effects) • 1,000 A/A sims • Python (NumPy, SciPy)
+
+**Keywords :** A/B testing, split‑testing, power analysis, MDE, hypothesis testing, confidence intervals, CUPED, causal inference, difference‑in‑differences, fixed effects regression, panel data models, controlled experimentation, Python, NumPy, SciPy
 
 ![Difference‑in‑Differences Illustration](images/did_plot.png)
 
 ---
 
 ## Table of Contents
-- [Description](#description)
 - [Project Overview](#project-overview)
 - [Project Structure](#project-structure)
 - [Installation](#installation)
