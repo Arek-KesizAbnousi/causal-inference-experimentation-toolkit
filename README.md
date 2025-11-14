@@ -9,9 +9,12 @@ A compact Python toolkit for **A/B testing** (power/MDE, hypothesis tests), **va
 - **Difference‑in‑Differences:** estimate treatment effects with **two‑way fixed effects** logic on simulated panel data.
 - **Validation:** **1,000× A/A simulations** confirm calibration (type I ≈ **0.05**; 95% CI coverage ≈ **0.95**).
 
-**Feature tags:** A/B testing (split‑testing) • Power & MDE • Welch t‑test • Two‑proportion z‑test • CUPED • DiD (two‑way fixed effects) • 1,000 A/A sims • Python (NumPy, SciPy)
 
-**Keywords :** A/B testing, split‑testing, power analysis, MDE, hypothesis testing, confidence intervals, CUPED, causal inference, difference‑in‑differences, fixed effects regression, panel data models, controlled experimentation, Python, NumPy, SciPy
+### Feature tags
+<kbd>A/B testing</kbd> <kbd>split‑testing</kbd> <kbd>Power & MDE</kbd> <kbd>Welch t‑test</kbd> <kbd>Two‑proportion z‑test</kbd> <kbd>CUPED</kbd> <kbd>DiD (two‑way fixed effects)</kbd> <kbd>1,000 A/A sims</kbd> <kbd>Python</kbd> <kbd>NumPy</kbd> <kbd>SciPy</kbd>
+
+### Keywords 
+<kbd>A/B testing</kbd> <kbd>power analysis</kbd> <kbd>MDE</kbd> <kbd>hypothesis testing</kbd> <kbd>confidence intervals</kbd> <kbd>variance reduction</kbd> <kbd>CUPED</kbd> <kbd>causal inference</kbd> <kbd>difference‑in‑differences</kbd> <kbd>fixed effects regression</kbd> <kbd>panel data models</kbd> <kbd>controlled experimentation</kbd> <kbd>Python</kbd> <kbd>NumPy</kbd> <kbd>SciPy</kbd>
 
 ![Difference‑in‑Differences Illustration](images/did_plot.png)
 
