@@ -66,20 +66,48 @@ def cuped_adjust(control_pre: np.ndarray, control_post: np.ndarray,
     Y_adj_treatment = Y_adjusted[n_control:]
     return Y_adj_control, Y_adj_treatment, theta
 
+
+def two_prop_z_test(x1: int, n1: int, x2: int, n2: int, alternative: str = "two-sided"):
+    """
+    Two-proportion z-test (pooled standard error).
+    x1, n1: successes and trials in group 1
+    x2, n2: successes and trials in group 2
+    alternative: 'two-sided' | 'larger' | 'smaller' (tests p2 - p1)
+    Returns: (z_stat, p_value)
+    """
+    p1, p2 = x1 / n1, x2 / n2
+    p_pool = (x1 + x2) / (n1 + n2)
+    se = np.sqrt(p_pool * (1 - p_pool) * (1/n1 + 1/n2))
+    z = (p2 - p1) / se
+    if alternative == "two-sided":
+        p = 2 * (1 - st.norm.cdf(abs(z)))
+    elif alternative == "larger":   # H1: p2 - p1 > 0
+        p = 1 - st.norm.cdf(z)
+    else:                           # H1: p2 - p1 < 0
+        p = st.norm.cdf(z)
+    return z, p
+    
 def diff_in_diff(pre_control: np.ndarray, post_control: np.ndarray,
-                 pre_treatment: np.ndarray, post_treatment: np.ndarray):
+                 pre_treatment: np.ndarray, post_treatment: np.ndarray,
+                 alpha: float = 0.05):
     """
-    Compute the Difference-in-Differences estimate given outcomes for control and treatment groups
-    before and after an intervention.
-    - pre_control, post_control: arrays of outcomes for control group (pre and post intervention).
-    - pre_treatment, post_treatment: arrays of outcomes for treatment group (pre and post).
-    Returns: (diff_in_diff_estimate, t_statistic, p_value).
+    Difference-in-Differences estimate and Welch CI on the change scores.
+    Returns: (effect, t_stat, p_value, ci_lower, ci_upper)
     """
-    # Calculate change for each unit in each group
     change_control = post_control - pre_control
     change_treatment = post_treatment - pre_treatment
-    # Diff-in-diff estimate: difference in average changes
+
     diff_effect = np.mean(change_treatment) - np.mean(change_control)
-    # Statistical test for significance (Welch's t-test on the change scores)
-    t_stat, p_val = st.ttest_ind(change_treatment, change_control, equal_var=False)
-    return diff_effect, t_stat, p_val
+
+    # Welch t test on change scores
+    n1, n0 = len(change_treatment), len(change_control)
+    s1, s0 = np.var(change_treatment, ddof=1), np.var(change_control, ddof=1)
+    se = np.sqrt(s1/n1 + s0/n0)
+    t_stat = diff_effect / se
+    # Welch-Satterthwaite df
+    df = (s1/n1 + s0/n0)**2 / ((s1**2)/((n1**2)*(n1-1)) + (s0**2)/((n0**2)*(n0-1)))
+    p_val = 2 * (1 - st.t.cdf(abs(t_stat), df))
+    tcrit = st.t.ppf(1 - alpha/2, df)
+    ci_lower, ci_upper = diff_effect - tcrit*se, diff_effect + tcrit*se
+
+    return diff_effect, t_stat, p_val, ci_lower, ci_upper
