@@ -12,7 +12,7 @@
 - [Project Structure](#project-structure)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Results (What you should see)](#results-what-you-should-see)
+- [Results](#results)
 
 ## Description
 This toolkit demonstrates core experimentation and causal‑inference skills:
@@ -57,7 +57,7 @@ python example_usage.py
 python scripts/make_did_plot.py
 ```
 
-## Results (What you should see)
+## Results
 - **A/A validation (1,000 sims):** false positives ≈ **5%**; **95% CI** coverage ≈ **93–96%**.
 - **CUPED:** with pre‑period metric corr ≈ 0.4 → variance reduction ≈ **16–20%** → roughly that many **fewer samples** for same power.
 - **DiD:** recovers the injected treatment effect on synthetic panel data (within simulation noise) with sensible confidence intervals.
